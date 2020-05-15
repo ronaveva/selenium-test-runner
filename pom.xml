@@ -6,6 +6,7 @@
 	<artifactId>selenium-test-runner</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>selenium-test-runner</name>
+
 	<properties>
 		<suiteFolder>${suiteFolderValue}</suiteFolder>
 	</properties>
@@ -28,27 +29,37 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<directory>${project.basedir}/target</directory>
 		<outputDirectory>${project.build.directory}/classes</outputDirectory>
 		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
 		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
 		<scriptSourceDirectory>${project.basedir}/src/main/scripts</scriptSourceDirectory>
-		<testSourceDirectory>..\${suiteFolder}</testSourceDirectory>
-		<plugins>
+		<testSourceDirectory>${suiteFolder}</testSourceDirectory>
 
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.7.1</version>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>3.0.0</version>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M4</version>
+				<configuration>
+					<systemPropertyVariables>
+						<webdriver.gecko.driver>geckodriver-v0.26.0-linux64/geckodriver</webdriver.gecko.driver>
+						<rundeck.login.url>${rundeckLoginUrl}</rundeck.login.url>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

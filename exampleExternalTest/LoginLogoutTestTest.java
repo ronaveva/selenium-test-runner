@@ -30,7 +30,7 @@ public class LoginLogoutTestTest {
   }
   @Test
   public void loginLogoutTest() {
-    driver.get("http://localhost:4440/user/login");
+    driver.get(System.getProperty("rundeck.login.url"));
     driver.manage().window().setSize(new Dimension(1257, 899));
     driver.findElement(By.id("password")).sendKeys("admin");
     driver.findElement(By.id("login")).sendKeys("admin");
